@@ -7,11 +7,13 @@ import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import { notFoundError, errorHandler } from "./middleware/ErrorMiddleware.js";
 import { protRt } from "./routes/prodRt.js";
-import { config } from "./config/keys.js";
+import { userRt } from "./routes/userRt.js";
+import { payRt } from "./routes/payRt.js";
+import { uploadRt } from "./routes/uploadRt.js";
 
 (async () => {
     dotenv.config();
-    await mongoose.connect(config.MONGO_URI, {
+    await mongoose.connect(process.env.MONGO_URI, {
         useNewUrlParser: true, useCreateIndex: true,
         useFindAndModify: false, useUnifiedTopology: true })
     .then(() => console.log("MonogDB is now Connected!"))
@@ -38,6 +40,9 @@ import { config } from "./config/keys.js";
     app.use(cookieParser());
     app.use(logger("dev"));
     app.use("/api", protRt);
+    app.use("/api", userRt);
+    app.use("/api", payRt);
+    app.use("/api", uploadRt);
     app.use(notFoundError, errorHandler);
     
     const port = process.env.PORT || 9000;

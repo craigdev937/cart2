@@ -5,12 +5,18 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "client-install": "npm instll --prefix client",
+    "dev": "nodemon src/index.js",
+    "client": "npm run dev --prefix client",
+    "con": "concurrently \"npm run dev\" \"npm run client"
   },
-  "keywords": [],
+  "keywords": [
+    "MongoDB, Express, React, Node Modules"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
     "cloudinary": "^1.23.0",
     "cookie-parser": "^1.4.5",
@@ -27,5 +33,3 @@
     "nodemon": "^2.0.6"
   }
 }
-
-
